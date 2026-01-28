@@ -15,6 +15,7 @@ class Event extends Model
         'deskripsi',
         'tanggal_waktu',
         'lokasi',
+        'lokasi_id',
         'kategori_id',
         'gambar',
     ];
@@ -22,6 +23,8 @@ class Event extends Model
     protected $casts = [
         'tanggal_waktu' => 'datetime',
     ];
+
+    protected $appends = ['lokasi_name'];
 
     public function tikets()
     {
@@ -36,5 +39,21 @@ class Event extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function lokasi()
+    {
+        return $this->belongsTo(Lokasi::class);
+    }
+
+    /**
+     * Get the lokasi name safely
+     */
+    public function getLokasiNameAttribute()
+    {
+        if ($this->lokasi_id) {
+            return Lokasi::find($this->lokasi_id)?->nama_lokasi;
+        }
+        return null;
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\HistoriesController;
 use App\Http\Controllers\Admin\TiketController;
 use App\Http\Controllers\Admin\TipeTiketController;
+use App\Http\Controllers\Admin\LokasiController;
 use App\Http\Controllers\Buyer\EventController as BuyerEventController;
 use App\Http\Controllers\Buyer\OrderController as BuyerOrderController;
 
@@ -41,6 +42,9 @@ Route::middleware('auth')->group(function () {
 
         // Tipe Tiket Management
         Route::resource('tipe-tikets', TipeTiketController::class);
+
+        // Lokasi Management
+        Route::resource('lokasi', LokasiController::class);
 
         // Histories
         Route::get('/histories', [HistoriesController::class, 'index'])->name('histories.index');
